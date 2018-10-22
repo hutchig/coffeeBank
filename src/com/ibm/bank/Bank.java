@@ -23,7 +23,7 @@ public class Bank implements Accounts {
 	}
 
 	@GET
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String accounts() {
 		String result = "";
 
@@ -36,7 +36,7 @@ public class Bank implements Accounts {
 
 	@GET
 	@Path("/deposit")
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String deposit(@QueryParam("customer") String name, @QueryParam("amount") String amount) {
 		Customer customer = Customer.getCustomer(name);
 		try {
@@ -49,13 +49,13 @@ public class Bank implements Accounts {
 
 	@GET
 	@Path("/withdraw")
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String withdraw(@QueryParam("customer") String name, @QueryParam("amount") String amount) {
 		Customer customer = Customer.getCustomer(name);
 		try {
 			decrement(customer, Integer.parseInt(amount));
 		} catch (NotEnoughFundsException e) {
-			e.printStackTrace();
+			return "REFUSED";
 		}
 		return Integer.toString(getBalance(customer));
 	}
