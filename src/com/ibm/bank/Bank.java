@@ -28,7 +28,7 @@ public class Bank implements Accounts {
 		String result = "";
 
 		for (Customer person : vault.keySet()) {
-			result += person + " $" + vault.get(person) + "<br>";
+			result += person + " $" + vault.get(person) + " ";
 		}
 		return result + "\n";
 
